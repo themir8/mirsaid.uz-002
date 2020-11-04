@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<title></title>
+    <link rel="stylesheet" href="{% static '/blog/css/bootstrap.min.css' %}">
+</head>
+<body>
+	<div class="container">
+		<form method="post">
+			{% csrf_token %}
+			<table>
+	        {{ form }}
+	        </table>
+			<input type="submit" value="Saqlash" class="btn btn-success mt-3 mb-5">
+		</form>
+	</div>
+</body>
+</html>

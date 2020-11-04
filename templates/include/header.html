@@ -1,0 +1,95 @@
+<!-- MENU BAR -->
+    <nav class="navbar navbar-expand-lg navbar-static">
+        <div class="container">
+
+            <h3 style="font-size: 1.5em;"><a class="navbar-brand" href="/">
+                mirsaid.uz
+            </a></h3>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <h3 style="font-size: 1.5em;"><a href="#intro" class="nav-link smoothScroll">Hamkorlik</a></h3>
+                    </li>
+
+                    <li class="nav-item">
+                        <h3 style="font-size: 1.5em;"><a href="#contact" class="nav-link smoothScroll">Kontakt</a></h3>
+                    </li>
+                </ul>
+                {% if not request.user.is_authenticated %}
+                    <div class="mt-lg-0 mt-3 mb-4 mb-lg-0">
+                        <a href="/signup" class="custom-btn btn">Sign up</a>
+                    </div>
+                    <div class="mt-lg-0 mt-3 mb-4 mb-lg-0">
+                        <a href="/login" class="custom-btn btn">login</a>
+                    </div>
+                {% else %}
+                    <div class="mt-lg-0 mt-3 mb-4 mb-lg-0">
+                        <a href="https://telegram.me/mirsaidgroup" class="custom-btn btn">Chat</a>
+                    </div>
+              {% endif %}
+            </div>
+
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+      <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#navbarNav2" aria-controls="navbarNav2" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+            </button>
+       <div class="collapse navbar-collapse" id="navbarNav2">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a href="/blog/" class="nav-link smoothScroll">Blog</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/kurslar/" class="nav-link smoothScroll">Video Kurslar</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/news/" class="nav-link smoothScroll">IT yangiliklar</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/mir-forum/" class="nav-link smoothScroll">Forum</a>
+                    </li>
+                </ul>
+            </div>
+
+      </div>
+    </nav>
+
+    {% if request.user.is_authenticated and request.user.is_staff %}
+        <nav class="navbar-expand-lg navbar-bold-light fixed-bottom">
+          <div class="container">
+          <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#navbarNav2" aria-controls="navbarNav2" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                </button>
+           <div class="collapse navbar-collapse text-dark" id="navbarNav2">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <h6><a href="/blog/" class="nav-link smoothScroll">Yangi post</a></h6>
+                        </li>
+
+                        <li class="nav-item">
+                            <h6><a href="/kurslar/" class="nav-link smoothScroll">Video Kurslar</a></h6>
+                        </li>
+
+                        <li class="nav-item">
+                            <h6><a href="/mini-admin/" class="nav-link smoothScroll">Mini admin</a></h6>
+                        </li>
+
+                        <li class="nav-item">
+                            <h6><a href="/admin/" class="nav-link smoothScroll">Admin panel</a></h6>
+                        </li>
+                    </ul>
+                </div>
+
+          </div>
+        </nav>
+    {% endif %}

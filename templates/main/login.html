@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+
+     <title>MM | Main Page</title>
+
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="Tooplate">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
+
+     <link rel="icon" type="image/ico" href="{% static 'main/images/favicon_io/favicon.ico' %}">
+</head>
+<body>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" class="form-control mt-5">
+            <input type="text" name="password" placeholder="Password" class="form-control mt-5">
+            <input type="submit" name="button" value="Save" class="btn btn-success mt-5">
+        </form>
+    </div>
+</body>
+</html>

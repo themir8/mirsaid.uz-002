@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<title></title>
+    <link rel="stylesheet" href="{% static '/blog/css/bootstrap.min.css' %}">
+</head>
+<body>
+	<div class="container">
+		<form method="post">
+			{% csrf_token %}
+			<input type="submit" value="Saqlash" class="btn btn-success mt-3">
+			<h5 class="mt-5">Title</h5>
+			<input type="text" name="title" value="{{ post.title }}" class="form-control">
+			<h5 class="mt-5">Intro</h5>
+			<textarea name="intro" class="form-control" rows="5">{{ post.intro }}</textarea>
+			<h5 class="mt-5">Text</h5>
+			<textarea name="text" class="form-control" rows="15">{{ post.text }}</textarea>
+			<input type="submit" value="Saqlash" class="btn btn-success mt-3 mb-5">
+		</form>
+	</div>
+</body>
+</html>

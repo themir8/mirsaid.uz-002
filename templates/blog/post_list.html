@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+mirsaid Blog
+{% endblock %}
+
+
+{% block nav_title %}
+Python Blog UZ
+{% endblock %}
+
+{% block blog %}
+      <!-- Blog Entries Column -->
+
+        {% if post_list|length > 0 %}
+
+            {% for el in post_list %}
+
+
+
+                <!-- Blog Post -->
+                <div class="card mb-5">
+                  <div class="card-body">
+                    <h4 class="card-title"><a href="{{ el.get_absolute_url }}" style="color: #007bff !important;">{{ el.title }}</a></h4>
+                    <div class="text-muted" style="font-family: Roboto, sans-serif; font-size: 1rem;">
+                      <strong>{{el.category}}</strong> <small>Опубликовано в {{el.date}}</small>
+                    </div>
+                    <a href="{{ el.get_absolute_url }}">
+                    <img class="card-img" src="{% static 'media/' %}{{ el.image }}" alt="{{ el.title }}">
+                  </a>
+
+                    <h1 class="card-text mt-3">
+                            {{ el.get_intro|safe }}...
+                    </h1>
+
+                    {% if request.user.is_authenticated and request.user.is_staff %}
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <!-- Edit knopkasi bosilganda n urlga UPDATE yoki boshqacha buyrug' boradi postni o'zgartirish uchun -->
+                          <a href="{{ el.edit_url }}" class="btn btn-lg btn-outline-secondary">Update</a>
+                          <!-- Delete knopkasi bosilganda n urlga DELETE buyrug'i boradi va shu postda draft ptichka yoqiladi -->
+                          <a href="{{ el.del_url }}" class="btn btn-lg btn-outline-secondary">Delete</a>
+                          <a
+                            href="{{ el.draft_url }}"
+                            {% if el.draft %}
+                              class="btn btn-lg btn-dark"
+                            {% elif not el.draft %}
+                              class="btn btn-lg btn-outline-dark"
+                            {% endif %}
+                          >
+                              Draft
+                          </a>
+                        </div>
+
+                        <small class="text-muted">ID: {{ el.id }}</small>
+
+                        <small class="text-muted">{{ el.date|date:"j-F, Y" }}</small>
+                      </div>
+                    {% endif %}
+
+
+                </div>
+
+
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <div class="container mt-5">
+                <h1 class="font-weight-bold">No posts</h1>
+            </div>
+        {% endif %}
+
+
+
+<div class="text-center">
+    {% include 'include/pagination.html' %}
+</div>
+
+
+{% endblock %}

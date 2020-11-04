@@ -1,0 +1,86 @@
+{% extends 'miniadmin/base.html' %}
+{% block body %}
+<div class="container mt-5">
+	<h1>Posts</h1>
+		<table class="table border-bottom border-dark mt-4">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Title</th>
+					<th scope="col">Category</th>
+					<th scope="col">Author</th>
+					<th scope="col">Date</th>
+					<th scope="col">Update</th>
+					<th scope="col">Delete</th>
+					<th scope="col">Draft</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% if post_list|length > 0 %}
+
+			{% for el in post_list %}
+				<tr>
+					<th scope="row">{{ el.id }}</th>
+					<td><a href="{{ el.get_absolute_url }}"><b>{{ el.title }}</b></a></td>
+					<td><a href="{{ el.category.get_absolute_url }}">{{ el.category.name }}</a></td>
+					<td>{{ el.author }}</td>
+					<td>{{ el.date }}</td>
+                    <td><a href="{{ el.edit_url }}" class="btn btn-sm btn-outline-success">Update</a></td>
+					<td><a href="{{ el.del_url }}" style="" class="btn btn-sm btn-outline-danger">Delete</a></td>
+					<td>
+						<a
+						href="{{ el.draft_url }}"
+						{% if el.draft %}
+							class="btn btn-sm btn-dark"
+						{% elif not el.draft %}
+							class="btn btn-sm btn-outline-dark"
+						{% endif %}
+						>
+								Draft
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+
+			{% else %}
+				<div class="container mt-5">
+					<h1 class="font-weight-bold">No posts</h1>
+				</div>
+			{% endif %}
+				
+			</tbody>
+		</table>
+
+<h1 class="mt-5">Categories</h1>
+	<table class="table mt-4">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Category name</th>
+				<th scope="col">Description</th>
+				<th scope="col">Url</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				{% if category_list|length > 0 %}
+
+			{% for el in category_list %}
+				<tr>
+					<th scope="row">{{ el.id }}</th>
+					<td>{{ el.name }}</td>
+					<td>{{ el.description }}</td>
+					<td><a href="{{ el.get_absolute_url }}">{{ el.get_absolute_url }}</a></td>
+				</tr>
+			{% endfor %}
+
+			{% else %}
+				<div class="container mt-5">
+					<h1 class="font-weight-bold">No posts</h1>
+				</div>
+			{% endif %}
+			</tr>
+		</tbody>
+	</table>
+</div>
+{% endblock body %}

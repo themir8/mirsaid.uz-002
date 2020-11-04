@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+
+     <title>Mirsaid uz</title>
+
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="Tooplate">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'main/css/all.min.css' %}">
+     <link rel="stylesheet" href="{% static 'main/css/owl.carousel.min.css' %}">
+     <link rel="stylesheet" href="{% static 'main/css/owl.theme.default.min.css' %}">
+
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="{% static 'main/css/tooplate-ben-resume-style.css' %}">
+
+     <link rel="icon" type="image/ico" href="{% static 'main/images/favicon_io/favicon.ico' %}">
+</head>
+
+<body data-spy="scroll" data-target="#navbarNav" data-offset="50">
+
+    <!-- MENU BAR -->
+    {% include "include/header.html" %}
+
+
+    <!-- HERO -->
+    <section class="hero d-flex flex-column justify-content-center align-items-center mt-5" id="intro">
+
+         <div class="container">
+
+
+
+                   <div class="mx-auto d-flex flex-column justify-content-center align-items-center col-lg-7 col-md-7 col-12">
+                        <div class="hero-tex">
+
+                            <h1 class="hero-title"> Mirsaid, web dasturchi</h1>
+
+                            <a href="https://t.me/Mirsaid_uz" class="email-link" target="_blank">
+                               Onlayn bog'lanish
+                            </a>
+
+                        </div>
+                    </div>
+
+        </div>
+    </section>
+
+    <section class="about section-padding" id="about">
+        <div class="container">
+<h1 class="text-center">Sayt haqida</h1>
+<hr>
+
+            <div class="row about-third">
+            	<div class="col-lg-4 col-md-4 col-12">
+                <h3>Sayt haqida</h3>
+                <p>Bu saytni yosh dasturchilarga yordam berish tariqasida yaratilgan</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                <h3>Mauris semper</h3>
+                <p>Cras et nisl vestibulum, accumsan elit sed, pretium enim. Vestibulum in condimentum magna. Maecenas quam magna, iaculis eu turpis et, commodo pulvinar leo.</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                <h3>Integer id neque</h3>
+                <p>Duis at mollis leo, venenatis congue ex. Cras urna dui, gravida euismod lectus et, cursus tempor nulla. Praesent at turpis quis ex tristique gravida quis eget eros.</p>
+                </div>
+            </div>
+
+            <h1 class="text-center">Blog</h1>
+            <hr>
+            <h5 class="mb-4">Eng ohirgi postlar</h5>
+            <div class="row">
+
+              {% if post_list|length > 0 %}
+
+            {% for el in post_list %}
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="{{ el.get_absolute_url }}">
+                  <img class="card-img-top border-bottom" src="{% static 'media/' %}{{ el.image }}" alt="{{ el.title }}">
+                  </a>
+                  <div class="card-body">
+                  <a href="{{ el.get_absolute_url }}">
+                    <h3>{{ el.title }}</h3>
+                  </a>
+                    <p class="card-text">
+                      {{ el.get_intro|safe }}
+                    </p>
+                    {% if request.user.is_authenticated and request.user.is_staff %}
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <!-- Delete knopkasi bosilganda n urlga DELETE buyrug'i boradi va shu postda draft ptichka yoqiladi -->
+                          <a href="{{ el.edit_url }}" class="btn btn-sm btn-outline-secondary">Update</a>
+                          <!-- Edit knopkasi bosilganda n urlga UPDATE yoki boshqacha buyrug' boradi postni o'zgartirish uchun -->
+                          <a href="{{ el.del_url }}" class="btn btn-sm btn-outline-secondary">Delete</a>
+                          <a
+                            href="{{ el.draft_url }}"
+                            {% if el.draft %}
+                              class="btn btn-sm btn-dark"
+                            {% elif not el.draft %}
+                              class="btn btn-sm btn-outline-dark"
+                            {% endif %}
+                          >
+                              Draft
+                          </a>
+                        </div>
+
+                        <small class="text-muted">ID: {{ el.id }}</small>
+
+                        <small class="text-muted">{{ el.date|date:"j-F, Y" }}</small>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+            </div>
+                      
+            {% endfor %}
+
+        {% else %}
+            <div class="container mt-5">
+                <h1 class="font-weight-bold">No posts</h1>
+            </div>
+        {% endif %}
+
+            </div>
+            <h4 class="text-right"><a href="/blog/">Hammasini ko'rish >>></a></h4>
+            <hr>
+
+        </div>
+    </section>
+
+
+     <section class="contact section-padding pt-0 mt-5 text-center" id="contact">
+      <div class="container">
+        <div class="row">
+
+
+            <div class="mx-auto col-lg-4 col-md-6 col-12">
+              <a href="https://t.me/Mirsaid_uz" class="email-link" target="_blank">
+                  Onlayn bog'lanish
+              </a>
+
+
+                <ul class="social-links mt-5">
+                    <li><h6>Follow me on: </h6></li><br>
+                    <li>  <a href="https://t.me/mirsaid_uz" target="_blank">
+                      <img src="{% static 'main/images/telegram.svg' %}">
+                    </a></li>
+                    <li>  <a href="https://instagram.com/mirsaid.m8" target="_blank">
+                      <img src="{% static 'main/images/instagram.svg' %}">
+                    </a></li>
+                    <li>  <a href="https://instagram.com/mirsaid.m8" rel="noopener" target="_blank">
+                      <img src="{% static 'main/images/youtube.svg' %}">
+                    </a></li>
+                    
+                </ul>
+            </div>
+
+        </div>
+      </div>
+    </section>
+     <!-- SCRIPTS -->
+     <script src="{% static 'main/js/jquery.min.js' %}"></script>
+     <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+     <script src="{% static 'main/js/smoothscroll.js' %}"></script>
+     <script src="{% static 'main/js/owl.carousel.min.js' %}"></script>
+     <script src="{% static 'main/js/custom.js' %}"></script>
+
+</body>
+</html>
+
+<!-- Downloading img -->
+<!-- <a href="/static/images/true-agency.jpg" download="/static/images/true-agency.jpg"> -->

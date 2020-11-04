@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="mirsaid">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'main/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/owl.theme.default.min.css' %}">
+
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="{% static 'main/css/tooplate-ben-resume-style.css' %}">
+
+
+
+
+    <title>{% block title %}{% endblock %}</title>
+
+
+
+    <link rel="icon" type="image/ico" sizes="32x32" href="{% static 'main/images/favicon_io/favicon.ico' %}">
+
+</head>
+
+<body>
+
+    <!-- MENU BAR -->
+    {% include "include/header.html" %}
+
+
+{% block body %}{% endblock %}
+
+
+  <!-- Page Content -->
+  <div class="container">
+
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
+
+
+        <h1 class="text-coloring my-4 text-dark">
+          Yangilari
+        </h1>
+
+
+        {% block blog %}{% endblock %}
+
+      </div>
+
+
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+      {% if request.user.is_authenticated and request.user.is_staff %}
+        <div class="card my-4">
+          <div class="card-body">
+            <div class="dropdown">
+                <a class="btn btn-primary" href="/admin/blog/post/add" target="_blank">Yangi post</a>
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                View categories
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            {% if post_list|length > 0 %}
+
+                {% for el in post_list %}
+                <a class="dropdown-item brdr" href="/posts/{{ el.id }}">{{ el.category.name }}</a>
+
+                {% endfor %}
+
+            {% else %}
+                <a class="dropdown-item" href="#">No posts</a>
+            {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+
+
+
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Categories</h5>
+          <div class="card-body">
+                {% if post_list|length > 0 %}
+
+                    {% for el in post_list %}
+                    <a class="btn btn-secondary" href="{{ el.category.get_absolute_url }}">{{ el.category.name }}</a>
+
+                    {% endfor %}
+
+                {% else %}
+                    <a>No posts</a>
+                {% endif %}
+          </div>
+        </div>
+
+        <!-- Side Widget -->
+        <div class="card my-4">
+          <div class="card-body">
+            <h1 class="card-text"><a href="https://t.me/Mirsaid_M1" target="_blank"></a>Reklamalar:</h1>
+          </div>
+        </div>
+
+        <!-- Side Widget -->
+        <div class="card my-4">
+          <a href="https://t.me/joinchat/AAAAAFbI79q_fBDws9ZTvA" target="_blank">
+            <img class="card-img-top" src="{% static 'blog/img/blog.jpg' %}" alt="Card image cap">
+          </a>
+        </div>
+
+        <!-- Side Widget -->
+        <!-- <div class="card my-4 bg-light">
+          <h5 class="card-header">Side Widget</h5>
+          <div class="card-body">
+            <div class="card-title text-center"><h5>Card title</h5></div>
+            <div class="card-text">
+              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+            </div>
+            <hr>
+            <div class="card-title text-center"><h5>Card title</h5></div>
+            <div class="card-text">
+              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+            </div>
+            <hr>
+            <div class="card-title text-center"><h5>Card title</h5></div>
+            <div class="card-text">
+              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+            </div>
+          </div>
+        </div> -->
+        {% block cards %}{% endblock %}
+
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; <a href="https://t.me/joinchat/AAAAAFbI79q_fBDws9ZTvA" target="_blank">Python blog</a> Since 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'blog/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'main/js/smoothscroll.js' %}"></script>
+    <script src="{% static 'main/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'main/js/custom.js' %}"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
+    <script src="{% static 'blog/assets/js/vendor/popper.min.js' %}"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html>
