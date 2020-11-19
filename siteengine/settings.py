@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'miniadmin.apps.MiniadminConfig',
     # 'donat.apps.DonatConfig',
-    'school.apps.SchoolConfig',
+    'course.apps.CourseConfig',
 ]
 
 MIDDLEWARE = [
