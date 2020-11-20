@@ -3,3 +3,5 @@ ckeditor
 admin
 db.sqlite3
 scss
+env
+__pycache__
