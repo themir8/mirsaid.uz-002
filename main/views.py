@@ -2,6 +2,7 @@ from django import forms
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
@@ -22,35 +23,39 @@ class MainView(View):
 
 
 def Registration(request):
-
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            new_user = form.save()
-            return HttpResponseRedirect("/")
+    print(request.user.is_authenticated)
+    if(not request.user.is_authenticated):
+        if request.method == 'POST':
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                new_user = form.save()
+                return HttpResponseRedirect("/")
+        else:
+            form = UserCreationForm()
+        return render(request, "main/registration.html", {
+            'form': form,
+            })
     else:
-        form = UserCreationForm()
-    return render(request, "main/registration.html", {
-        'form': form,
-        })
+       return HttpResponseRedirect("/") 
 
 
 def LoginView(request):
-
-    if request.method == "POST":
-        username = request.POST.get('username', '')
-        password = request.POST.get('password', '')
-        
-        user = authenticate(
-            username=username,
-            password=password
-            )
-        if user is not None and user.is_active:
-            login(request, user)
-            return HttpResponseRedirect("/")
-        else:
-            return HttpResponseRedirect("/account/invalid/")
-        
+    if(not request.user.is_authenticated):
+        if request.method == "POST":
+            username = request.POST.get('username', '')
+            password = request.POST.get('password', '')
+            
+            user = authenticate(
+                username=username,
+                password=password
+                )
+            if user is not None and user.is_active:
+                login(request, user)
+                return HttpResponseRedirect("/")
+            else:
+                return HttpResponseRedirect("/account/invalid/")
+    else:
+           return HttpResponseRedirect("/") 
     
     return render(request, 'main/login.html')
 
