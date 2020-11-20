@@ -1,8 +1,7 @@
-
-push:
+git:
 	git add \.
-	git commit -m 'initial project version'
-	git push
+	git commit -m "$m"
+	git push -u origin master
 
 run: manage.py
 	python manage.py runserver
