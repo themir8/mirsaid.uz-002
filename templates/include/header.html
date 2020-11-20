@@ -28,9 +28,9 @@
                         <a href="/login" class="custom-btn btn">login</a>
                     </div>
                 {% else %}
-                    <div class="mt-lg-0 mt-3 mb-4 mb-lg-0">
-                        <a href="https://telegram.me/mirsaidgroup" class="custom-btn btn">Chat</a>
-                        {{request.user.username}}
+                    <div class="row mt-lg-0 mt-3 mb-4 mb-lg-0">
+                        <a href="https://telegram.me/mirsaidgroup" class="col-sm custom-btn btn">Chat</a>
+                    <h5 class="col-sm text-light">{{request.user.username}}</h5>
                     </div>
               {% endif %}
             </div>
