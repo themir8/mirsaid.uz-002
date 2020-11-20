@@ -4,3 +4,4 @@ scss
 env
 __pycache__
 *.sh
+fileserver.go
