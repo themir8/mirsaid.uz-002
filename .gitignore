@@ -1,6 +1,4 @@
 venv
-ckeditor
-admin
 db.sqlite3
 scss
 env
