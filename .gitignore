@@ -5,3 +5,4 @@ db.sqlite3
 scss
 env
 __pycache__
+*.sh
